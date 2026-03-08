@@ -1,7 +1,7 @@
-# Architecture Document: YieldVault RWA
+# Architecture Document: YieldVault - Stellar RWA
 
 ## 1. System Overview
-YieldVault RWA consists of a frontend Web Application and a suite of Soroban Smart Contracts deployed on the Stellar network.
+YieldVault - Stellar RWA consists of a frontend Web Application and a suite of Soroban Smart Contracts deployed on the Stellar network.
 
 ## 2. Technology Stack
 - **Frontend Framework:** React (via Vite)
