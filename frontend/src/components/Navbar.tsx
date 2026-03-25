@@ -3,12 +3,24 @@ import WalletConnect from './WalletConnect';
 import { Layers } from 'lucide-react';
 
 interface NavbarProps {
+    currentPath: '/' | '/analytics';
+    onNavigate: (path: '/' | '/analytics') => void;
     walletAddress: string | null;
     onConnect: (address: string) => void;
     onDisconnect: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ walletAddress, onConnect, onDisconnect }) => {
+const navLinkStyle = (isActive: boolean): React.CSSProperties => ({
+    color: isActive ? '#fff' : 'var(--text-secondary)',
+    fontWeight: isActive ? 600 : 500,
+    padding: '8px 12px',
+    borderRadius: '9999px',
+    background: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+    border: isActive ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid transparent',
+    transition: 'all 0.2s ease'
+});
+
+const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, walletAddress, onConnect, onDisconnect }) => {
     return (
         <nav style={{
             position: 'fixed',
@@ -44,6 +56,29 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, onConnect, onDisconnect 
                     }}>
                         YieldVault <span style={{ color: 'var(--accent-cyan)' }}>RWA</span>
                     </span>
+                </div>
+
+                <div className="flex items-center gap-sm" style={{ marginLeft: 'auto', marginRight: '24px' }}>
+                    <a
+                        href="/"
+                        style={navLinkStyle(currentPath === '/')}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            onNavigate('/');
+                        }}
+                    >
+                        Home
+                    </a>
+                    <a
+                        href="/analytics"
+                        style={navLinkStyle(currentPath === '/analytics')}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            onNavigate('/analytics');
+                        }}
+                    >
+                        Analytics
+                    </a>
                 </div>
 
                 <WalletConnect
